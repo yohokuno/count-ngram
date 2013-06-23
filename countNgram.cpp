@@ -3,7 +3,7 @@
 
 int main(const int argc, const char **argv) {
     if (argc > 1 && string(argv[1]) == "-h") {
-        cerr << "Usage: count-ngram [order] [size]\n"
+        cerr << "Usage: count-ngram [order] [size] [beginning] [ending] [separator]\n"
             "   Count frequent n-gram from big data under limited memory.\n"
             "   Reads space-separated text from stdin and write stdout.\n"
             "   order: n-gram order [default: 3]\n"
