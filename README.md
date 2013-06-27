@@ -1,13 +1,13 @@
 count-ngram
 ===========
 
- Count frequent n-gram from big data with limited memory.
+Count frequent n-gram from big data with limited memory.
 
- It processes 100GB text data within 23 hours on 8GB machine, yielding 1 million top frequent word n-grams. This implements Lossy Counting Algorithm [Manku and Motwani, 2002].
+It processes 100GB text data within 23 hours on 8GB machine, yielding 1 million top frequent word n-grams. This implements Lossy Counting Algorithm [Manku and Motwani, 2002].
 
-    G. Manku and R. Motwani. Approximate frequency counts over data streams. In International Conference on Very Large Data Bases, pages 346-357, 2002
+> G. Manku and R. Motwani. Approximate frequency counts over data streams. In International Conference on Very Large Data Bases, pages 346-357, 2002
 
-For people who are not familiar with natural language processing, n-gram is a sequence of n words in corpus. Counting n-grams is an essential for language models, which perform important role in machine translation, speech recognition, character recognition, and text input method.
+For people who are not familiar with natural language processing, an n-gram is a sequence of adjacent n words in corpus. Counting n-grams is an essential for language models, which perform important role in machine translation, speech recognition, optical character recognition, spelling correction and text input method.
 
 Install
 -----------

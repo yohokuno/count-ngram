@@ -3,6 +3,7 @@
 
 typedef LossyCounter<int> Counter;
 typedef LossyCounter<int>::Iterator Iterator;
+typedef LossyCounter<int>::Pair Pair;
 
 TEST(LossyCounterTestCase, LossyCounterTest) {
     Counter counter(3);
@@ -11,7 +12,7 @@ TEST(LossyCounterTestCase, LossyCounterTest) {
         counter.count(i);
     }
 
-    set<pair<int,size_t> > actual(counter.begin(), counter.end()),
+    set<Pair> actual(counter.begin(), counter.end()),
         expected = {{100,3},{101,2},{102,2}};
 
     EXPECT_EQ(expected, actual);
@@ -24,14 +25,11 @@ TEST(LossyCounterTestCase, TakeFrequentTest) {
         counter.count(i);
     }
 
-    deque<Iterator> actual;
+    deque<Pair> actual;
     counter.takeFrequent(actual, 2);
+    deque<Pair> expected = {{100,3},{102,2}};
 
-    EXPECT_EQ(2, actual.size());
-    EXPECT_EQ(100, actual[0]->first);
-    EXPECT_EQ(3, actual[0]->second);
-    EXPECT_EQ(102, actual[1]->first);
-    EXPECT_EQ(2, actual[1]->second);
+    EXPECT_EQ(expected, actual);
 }
 
 TEST(LossyCounterTestCase, ExtractNgramTest) {

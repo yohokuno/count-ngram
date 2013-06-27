@@ -30,11 +30,11 @@ int main(const int argc, const char **argv) {
         }
     }
 
-    deque<LossyCounter<string>::Iterator> result;
+    deque<LossyCounter<string>::Pair> result;
     counter.takeFrequent(result, size);
 
     for (auto i : result) {
-        cout << i->first << " " << i->second << endl;
+        cout << i.first << separator << i.second << endl;
     }
 
     return 0;

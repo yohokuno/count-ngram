@@ -5,16 +5,16 @@
 #include <vector>
 #include <queue>
 #include <deque>
-#include <tr1/unordered_map>
+#include <unordered_map>
 
 using namespace std;
-using namespace std::tr1;
 
 template<typename Key>
 class LossyCounter {
   public:
     typedef unordered_map<Key, size_t> Map;
     typedef typename Map::iterator Iterator;
+    typedef pair<Key, size_t> Pair;
 
     LossyCounter(const size_t capacity_) : capacity(capacity_) {
         number = 0;
@@ -45,18 +45,19 @@ class LossyCounter {
     size_t size() {
         return counter.size();
     }
-    void takeFrequent(deque<Iterator> &result, size_t size) {
+    void takeFrequent(deque<Pair > &result, size_t size) {
         struct Compare {
-            bool operator()(Iterator a, Iterator b) {
-                return a->second > b->second;
+            bool operator()(Pair &a, Pair &b) {
+                return a.second > b.second;
             }
         };
-        priority_queue<Iterator, vector<Iterator>, Compare> que;
+        priority_queue<Pair, vector<Pair>, Compare> que;
         for (auto i = counter.begin(); i != counter.end(); i++) {
-            que.push(i);
+            que.push(*i);
             if (que.size() == size+1) {
                 que.pop();
             }
+            counter.erase(i);
         }
         while (!que.empty()) {
             result.push_front(que.top());
@@ -69,7 +70,7 @@ class LossyCounter {
     const size_t capacity;
 };
 
-vector<string> parseLine(const string &line,
+inline vector<string> parseLine(const string &line,
                          const string &beginning, const string &ending) {
     vector<string> result;
     istringstream iss(line);
@@ -89,7 +90,8 @@ vector<string> parseLine(const string &line,
 
     return result;
 }
-vector<string> extractNgram(const string &line, const size_t order,
+
+inline vector<string> extractNgram(const string &line, const size_t order,
                             const string &beginning, const string &ending) {
     vector<string> result;
     deque<string> context;
