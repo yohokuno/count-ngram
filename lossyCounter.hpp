@@ -29,9 +29,11 @@ class LossyCounter {
         }
         if (number/capacity != delta) {
             delta = number/capacity;
-            for (auto i = counter.begin(); i != counter.end(); i++) {
+            for (auto i = counter.begin(); i != counter.end();) {
                 if (i->second < delta) {
-                    counter.erase(i);
+                    i = counter.erase(i);
+                } else {
+                    i ++;
                 }
             }
         }
@@ -52,12 +54,12 @@ class LossyCounter {
             }
         };
         priority_queue<Pair, vector<Pair>, Compare> que;
-        for (auto i = counter.begin(); i != counter.end(); i++) {
+        for (auto i = counter.begin(); i != counter.end();) {
             que.push(*i);
             if (que.size() == size+1) {
                 que.pop();
             }
-            counter.erase(i);
+            i = counter.erase(i);
         }
         while (!que.empty()) {
             result.push_front(que.top());
