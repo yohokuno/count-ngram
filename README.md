@@ -14,7 +14,6 @@ Install
 
     ./waf configure
     ./waf build
-    ./waf build/test
     sudo ./waf install
 
 Usage
